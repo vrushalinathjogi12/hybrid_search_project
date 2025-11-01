@@ -1,12 +1,55 @@
-# Hybrid Trie + Hash Keyword Search
+Hybrid Search Project
 
-### Description
-This project demonstrates an **Efficient Keyword Search System** that combines the advantages of Trie and Hash Map:
-- Fast exact word lookup using Hash Map (O(1)).
-- Efficient prefix lookup and autocomplete using Trie.
-- Reduced memory usage via hash-based Trie nodes.
-- Each Trie node caches top-k (most frequent) words for fast suggestions.
+📋 Description
 
----
+This project combines multiple search algorithms to improve search efficiency and accuracy.
+It is designed to demonstrate hybrid techniques that integrate keyword-based and semantic search methods.
 
-### 📦 Folder Structure
+⚙️ Features
+
+Combines multiple search algorithms
+
+Supports efficient data retrieval
+
+User-friendly interface (optional)
+
+Easy to extend for other datasets
+
+🧑‍💻 Technologies Used
+
+Python
+
+Django / Flask (if applicable)
+
+NumPy, Pandas
+
+Scikit-learn (if ML-based)
+
+🚀 How to Run
+
+Clone the repository:
+
+git clone https://github.com/vrushalinathjogi12/hybrid_search_project.git
+
+
+Navigate to the project folder:
+
+cd hybrid_search_project
+
+
+Run the project:
+
+python main.py
+
+
+(or update with your actual command)
+
+📊 Results
+
+Describe your main outcome or performance results here — for example, “Hybrid search improved query accuracy by 20% over baseline methods.”
+
+👩‍💻 Author
+
+Vrushali Santosh Nathjogi
+M.Tech in Computer Engineering
+Pimpri Chinchwad College of Engineering, Pune
