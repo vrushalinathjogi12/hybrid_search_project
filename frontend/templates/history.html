@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History - Hybrid Search System</title>
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0078d7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.8em;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0078d7;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f0f8ff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-left: 5px solid #0078d7;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+
+        .no-history {
+            text-align: center;
+            color: #999;
+            font-size: 1.2em;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-btn a {
+            text-decoration: none;
+            background-color: #0078d7;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            transition: 0.3s;
+        }
+
+        .back-btn a:hover {
+            background-color: #005fa3;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px 0;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        📜 Search History
+    </header>
+
+    <div class="container">
+        <h2>Past Searches</h2>
+
+        {% if history and history|length > 0 %}
+        <ul>
+            {% for item in history %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="no-history">No searches yet. Try searching something!</div>
+        {% endif %}
+
+        <div class="back-btn">
+            <a href="/">← Back to Search</a>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Hybrid Search Project — Vrushali Nathjogi
+    </footer>
+</body>
+</html>

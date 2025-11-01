@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficient Keyword Search</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #7e57c2, #673ab7);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 2.5rem;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            animation: slideUp 1s ease-in-out;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffca28;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffd740;
+            transform: scale(1.05);
+        }
+
+        .results {
+            margin-top: 25px;
+            text-align: left;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .history-container {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ffeb3b;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Efficient Keyword Search using Trie + HashMap</h1>
+
+    <div class="container">
+        <form method="POST" action="/" id="searchForm">
+            <input type="text" name="keyword" id="keyword" placeholder="Enter keyword..." required>
+            <button type="submit">Search</button>
+            <button type="button" id="clearBtn">Clear History</button>
+        </form>
+
+        <div class="results">
+            {% if exact_match %}
+                <h3>✅ Exact Match Found:</h3>
+                <p><strong>{{ keyword }}</strong> exists in dictionary.</p>
+            {% elif keyword %}
+                <h3>❌ No Exact Match Found for "{{ keyword }}"</h3>
+            {% endif %}
+
+            {% if suggestions %}
+                <h3>🔍 Suggestions:</h3>
+                <ul>
+                    {% for s in suggestions %}
+                        <li>{{ s }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div class="history-container">
+            <h2>Search History</h2>
+            {% if history %}
+                <ul>
+                    {% for item in history %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No history yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="message" id="msgBox"></div>
+    </div>
+
+    <script>
+        document.getElementById('clearBtn').addEventListener('click', async () => {
+            const res = await fetch('/clear_history', { method: 'POST' });
+            const data = await res.json();
+            document.getElementById('msgBox').innerText = data.message;
+
+            // Refresh the history display instantly
+            document.querySelector('.history-container ul').innerHTML = '';
+            document.querySelector('.history-container p')?.remove();
+            const p = document.createElement('p');
+            p.textContent = "No history yet.";
+            document.querySelector('.history-container').appendChild(p);
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!-- cd hybrid_search_project
+python -m venv venv
+venv\Scripts\activate
+cd backend
+python app.py -->
